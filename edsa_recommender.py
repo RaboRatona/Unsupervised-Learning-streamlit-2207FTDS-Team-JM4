@@ -27,6 +27,8 @@
 """
 # Streamlit dependencies
 import streamlit as st
+from streamlit_option_menu import option_menu
+from streamlit_lottie import st_lottie
 
 # Data handling dependencies
 import pandas as pd
@@ -36,26 +38,40 @@ import numpy as np
 from utils.data_loader import load_movie_titles
 from recommenders.collaborative_based import collab_model
 from recommenders.content_based import content_model
+import joblib,os
+from PIL import Image
+import requests
+import json
 
 # Data Loading
 title_list = load_movie_titles('resources/data/movies.csv')
 
 # App declaration
 def main():
+    
 
     # DO NOT REMOVE the 'Recommender System' option below, however,
     # you are welcome to add more options to enrich your app.
-    page_options = ["Recommender System","Solution Overview"]
+    # page_options = ["🏠Home","📖About","📊EDA","Recommender System","Solution Overview"]
 
+    with st.sidebar:
+            page_selection = option_menu(
+                menu_title="JM4",  # required
+                options=["Home","EDA","Recommender System", "Solution Overview", "Reviews"],  # required
+                icons=["house", "bar-chart", "film","book","send"],  # optional
+                # menu_icon="cast",  # optional
+                # default_index=0,  # optional
+            )
     # -------------------------------------------------------------------
     # ----------- !! THIS CODE MUST NOT BE ALTERED !! -------------------
     # -------------------------------------------------------------------
-    page_selection = st.sidebar.selectbox("Choose Option", page_options)
+    # page_selection = st.sidebar.selectbox("Choose Option", page_options)
     if page_selection == "Recommender System":
         # Header contents
         st.write('# Movie Recommender Engine')
         st.write('### EXPLORE Data Science Academy Unsupervised Predict')
         st.image('resources/imgs/Image_header.png',use_column_width=True)
+        
         # Recommender System algorithm selection
         sys = st.radio("Select an algorithm",
                        ('Content Based Filtering',
@@ -106,7 +122,22 @@ def main():
 
     # You may want to add more sections here for aspects such as an EDA,
     # or to provide your business pitch.
+    if page_selection == "Reviews":
+        
+        with st.form("my_form"):
+            st.title("Reviews")
+            st.text_area("Describe we can make your experience better when using the app")
+            st.form_submit_button(label="Submit", help=None, on_click=None, args=None, kwargs=None, disabled=False)
+    
 
+    if  page_selection == "Home":
+        st.title("WELCOME")
+    
+                
+
+               
+
+                
 
 if __name__ == '__main__':
     main()
