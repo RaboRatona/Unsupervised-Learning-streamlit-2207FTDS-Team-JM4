@@ -128,7 +128,8 @@ def main():
     if page_selection == "Solution Overview":
         st.title("Solution Overview")
         st.write("At Data Innovate, we understand the importance of providing accurate and reliable movie recommendations. That's why we compared five different models - SVD, BaseOnly, CoClustering, SVDpp, and SlopeOne - to determine which one would provide the best results. At Data Innovate, we believe in using the best tools and techniques to deliver the most accurate recommendations to our users. The SVD model is a testament to this commitment and provides our users with a movie-watching experience that is second to none.")
-
+        st.markdown('--------')
+        st.image('./resources/imgs/RMSE_Comparison3.png', use_column_width=True)
     # You may want to add more sections here for aspects such as an EDA,
     # or to provide your business pitch.
     
